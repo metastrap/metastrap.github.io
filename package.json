@@ -1,18 +1,32 @@
 {
-  "private": true,
+  "name": "metastrap.github.io",
+  "version": "1.0.0",
+  "description": "MetaStrap static website",
+  "repository": "https://github.com/itzsrikanth/nextjs-bootstrapper.git",
+  "author": "Srikanth Sharma <snow.650@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "serve out"
   },
   "dependencies": {
-    "@types/node": "^18.11.5",
-    "@types/react-dom": "^18.0.7",
-    "@types/react": "^18.0.23",
-    "next": "latest",
-    "react-dom": "^18.2.0",
+    "next": "^14.0.4",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.5",
+    "@types/react": "^18.0.23",
+    "@types/react-dom": "^18.0.7",
+    "tailwindcss": "^2.0.2",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
     "serve": "^14.2.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.3.3"
+  },
+  "volta": {
+    "node": "20.10.0",
+    "yarn": "4.0.2"
   }
 }
