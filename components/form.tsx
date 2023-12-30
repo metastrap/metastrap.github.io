@@ -6,12 +6,14 @@ import JSZip from 'jszip';
 import Metastrap, { enums } from '@metastrap/core';
 import type { types } from '@metastrap/core';
 
+const CURR_FRAMEWORK = 'next';
+
 export default function Form() {
   const { register, handleSubmit, formState: { errors } } = useForm<types.INextOptions>();
   const [zip, setZip] = useState<JSZip | null>(null);
 
   useEffect(() => {
-    fetch(`${window.location.origin}/zip/metastrap.zip`)
+    fetch(`${window.location.origin}/zip/${CURR_FRAMEWORK}.zip`)
       .then(async res => {
         if (res.ok) {
           setZip(
