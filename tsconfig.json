@@ -18,7 +18,13 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["app/*"],
+      "components/*": ["components/*"],
+      "types/*": ["types/*"],
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -26,6 +32,6 @@
     "**/*.tsx",
     "next.config.js",
     ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+, "utils/bundleWebpackPlugin.js", "utils/bundle.js"  ],
+  "exclude": ["node_modules", "next.config.js"]
 }
