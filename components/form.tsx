@@ -1,45 +1,43 @@
 'use client';
+
 import { useForm } from 'react-hook-form';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import JSZip from 'jszip';
-import dynamic from 'next/dynamic';
 import Metastrap, { enums } from '@metastrap/core';
-
-import { Inputs } from 'types';
-
-
+import type { types } from '@metastrap/core';
 
 export default function Form() {
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-  const [loading, setLoading] = React.useState(true);
-  let zip: JSZip;
+  const { register, handleSubmit, formState: { errors } } = useForm<types.INextOptions>();
+  const [zip, setZip] = useState<JSZip | null>(null);
 
-  fetch('http://localhost:3000/zip/metastrap.zip').then(async res => {
-    if (res.ok) {
-      zip = await res.blob() as unknown as JSZip;
-      setLoading(false);
-      return zip;
+  useEffect(() => {
+    fetch(`${window.location.origin}/zip/metastrap.zip`)
+      .then(async res => {
+        if (res.ok) {
+          setZip(
+            await res.blob() as unknown as JSZip
+          );
+          return;
+        }
+        throw new Error('Network response was not ok.');
+      });
+  }, []);
+
+  function onSubmit(data: types.INextOptions) {
+    if (zip) {
+      const ms = new Metastrap(
+        zip,
+        enums.EFrameworks.next,
+        data,
+      );
+      ms.downloadZip();
     }
-    throw new Error('Network response was not ok.');
-  });
-
-  function onSubmit(data: Inputs) {
-    const ms = new Metastrap(
-      zip,
-      enums.EFrameworks.next,
-      {
-        features: {
-          withTailwindcss: data.withTailwindcss,
-        },
-        downloadFileName: 'nextjs-project',
-      }
-    );
-    ms.downloadZip();
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="text" defaultValue="nextjs-project" {...register('downloadFileName')} />
-      <input type="checkbox" {...register('withTailwindcss')} />
+      <input type="checkbox" {...register('features.withTailwindcss')} />
       <button type="submit">Submit</button>
     </form>
   );

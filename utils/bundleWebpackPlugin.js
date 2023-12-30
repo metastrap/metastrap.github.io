@@ -1,5 +1,4 @@
-const path = require('path');
-const fs = require('node:fs/promises')
+const path = require('node:path');
 const bundle = require('./bundle');
 
 module.exports = class BundleWebpackPlugin {
@@ -9,20 +8,24 @@ module.exports = class BundleWebpackPlugin {
 
   apply(compiler) {
     compiler.hooks.run.tap('BundleWebpackPlugin', async () => {
-      const metastrapPath = path.join(
-        require.resolve('@metastrap/core')
-          .split('dist')
-          .shift(),
-        'dist', 'next'
+
+      await Promise.all(
+        this.options.src.map(async (src) => {
+          const outputPath = path.join(
+            this.options.output ||
+              compiler.options.output.path,
+            src.filenameWithExtn,
+          );
+          console.log('BundleWebpackPlugin', src.dirPath, outputPath);
+          try {
+            await bundle(src.dirPath, outputPath);
+          } catch (e) {
+            console.log(e);
+          }
+          return;
+        })
       );
-      const outputPath = path.join(this.options.output || compiler.options.output.path, 'metastrap.zip');
-      console.log('BundleWebpackPlugin', metastrapPath, outputPath);
-      try {
-        await bundle(metastrapPath, outputPath);
-        // await fs.writeFile(outputPath, zip);
-      } catch (e) {
-        console.log(e);
-      }
+
     });
   }
 }
