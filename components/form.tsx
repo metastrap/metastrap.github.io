@@ -17,7 +17,7 @@ export default function Form() {
       .then(async res => {
         if (res.ok) {
           setZip(
-            await res.blob() as unknown as JSZip
+            await JSZip.loadAsync(await res.arrayBuffer())
           );
           return;
         }
@@ -25,13 +25,14 @@ export default function Form() {
       });
   }, []);
 
-  function onSubmit(data: types.INextOptions) {
+  async function onSubmit(data: types.INextOptions) {
     if (zip) {
       const ms = new Metastrap(
         zip,
         enums.EFrameworks.next,
         data,
       );
+      await ms.run();
       ms.downloadZip();
     }
   }
