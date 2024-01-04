@@ -87,7 +87,7 @@ function Loop({ element, registerKey }: {
             disabled={!element.active}
             type="checkbox"
             key={id}
-            {...form.register(`${registerKey}.value`)}
+            {...form.register(`${registerKey}.value` as keyof IGroup)}
           />
           <label htmlFor={id}>{element.id}</label>
         </>
@@ -102,7 +102,7 @@ function Loop({ element, registerKey }: {
                 disabled={!element.active}
                 id={option}
                 value={option}
-                {...form.register(`${registerKey}.value`)}
+                {...form.register(`${registerKey}.value` as keyof IGroup)}
               />
               <label htmlFor={option}>{option}</label>
             </div>
@@ -115,7 +115,7 @@ function Loop({ element, registerKey }: {
           type="text"
           key={id}
           className="block mb-2"
-          {...form.register(`${registerKey}.value`)}
+          {...form.register(`${registerKey}.value` as keyof IGroup)}
         />
       );
   }

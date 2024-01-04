@@ -22,7 +22,7 @@ const nextConfig = {
         /* zip @metastrap/core/dist/<frameworks> to /public/zip/<frameworks.zip> */
         new BundleWebpackPlugin({
           src: Object.keys(frameworks).map((framework) => (
-            [{
+            {
               dirPath: path.join(
                 require.resolve('@metastrap/core')
                   .split('dist')
@@ -31,7 +31,7 @@ const nextConfig = {
                 framework,
               ),
               filenameWithExtn: `${framework}.zip`,
-            }]
+            }
           )),
           output: path.join('public', 'zip'),
         }),

@@ -27,7 +27,7 @@ export function convert(data: TElement): Record<string, unknown> {
 }
 
 export default function format(data: IGroup): types.INextOptions {
-  const features = convert(data) as unknown as types.INextOptions.features;
+  const features = convert(data) as unknown as types.INextOptions['features'] & Record<string, unknown>;
   const downloadFileName = features.withprojectName as string;
   delete features.withprojectName;
   return {
