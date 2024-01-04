@@ -1,23 +1,29 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import {
+  UseFormReturn, useForm,
+} from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import JSZip from 'jszip';
 import Metastrap, { enums } from '@metastrap/core';
-import type { types } from '@metastrap/core';
+
+import NextConfig from 'config/next';
+import { IGroup, TElement } from 'types/index';
+import format from 'formatters';
 
 const CURR_FRAMEWORK = 'next';
 
-export default function Form() {
-  const { register, handleSubmit, formState: { errors } } = useForm<types.INextOptions>();
+let form: UseFormReturn<IGroup>;
+
+export default function FormMain() {
   const [zip, setZip] = useState<JSZip | null>(null);
 
   useEffect(() => {
-    fetch(`${window.location.origin}/zip/${CURR_FRAMEWORK}.zip`)
-      .then(async res => {
+    fetch(`${global.location.origin}/zip/${CURR_FRAMEWORK}.zip`)
+      .then(async (res) => {
         if (res.ok) {
           setZip(
-            await JSZip.loadAsync(await res.arrayBuffer())
+            await JSZip.loadAsync(await res.arrayBuffer()),
           );
           return;
         }
@@ -25,23 +31,94 @@ export default function Form() {
       });
   }, []);
 
-  async function onSubmit(data: types.INextOptions) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async function onSubmit(data: IGroup) {
     if (zip) {
       const ms = new Metastrap(
         zip,
         enums.EFrameworks.next,
-        data,
+        format(data),
       );
       await ms.run();
       ms.downloadZip();
     }
   }
 
+  form = useForm({
+    defaultValues: NextConfig,
+  });
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" defaultValue="nextjs-project" {...register('downloadFileName')} />
-      <input type="checkbox" {...register('features.withTailwindcss')} />
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <Loop registerKey="" element={NextConfig} />
       <button type="submit">Submit</button>
     </form>
   );
+}
+
+function Loop({ element, registerKey }: {
+  // eslint-disable-next-line react/require-default-props
+  registerKey: string | undefined,
+  element: TElement
+}) {
+  const { type, id } = element;
+  switch (type) {
+    case 'group':
+      // eslint-disable-next-line no-case-declarations
+      const registerPrefix = (registerKey ? `${registerKey}.elements` : 'elements');
+      return (
+        <>
+          {
+            element.elements.map((elem, index) => (
+              <Loop
+                registerKey={`${registerPrefix}.${index}`}
+                key={element.id}
+                element={elem}
+              />
+            ))
+          }
+        </>
+      );
+    case 'checkbox':
+      return (
+        <>
+          <input
+            id={id}
+            disabled={!element.active}
+            type="checkbox"
+            key={id}
+            {...form.register(`${registerKey}.value`)}
+          />
+          <label htmlFor={id}>{element.id}</label>
+        </>
+      );
+    case 'radio':
+      return (
+        <>
+          {element.options.map((option: string) => (
+            <div key={option}>
+              <input
+                type="radio"
+                disabled={!element.active}
+                id={option}
+                value={option}
+                {...form.register(`${registerKey}.value`)}
+              />
+              <label htmlFor={option}>{option}</label>
+            </div>
+          ))}
+        </>
+      );
+    case 'text':
+      return (
+        <input
+          type="text"
+          key={id}
+          className="block mb-2"
+          {...form.register(`${registerKey}.value`)}
+        />
+      );
+  }
+  // if (registerKey !== undefined) {
+  // }
 }

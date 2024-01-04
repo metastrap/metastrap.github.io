@@ -1,7 +1,4 @@
-import MetaStrap from '@metastrap/core';
-import fs from 'node:fs';
-import Form from "components/form";
-import { enums } from "@metastrap/core";
+import Form from 'components/form';
 
 export default async function Home() {
   return (

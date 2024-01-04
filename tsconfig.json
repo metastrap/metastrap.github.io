@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "DOM",
+      "dom.iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,9 +25,18 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "app/*": ["app/*"],
-      "components/*": ["components/*"],
-      "types/*": ["types/*"],
+      "app/*": [
+        "app/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "config/*": [
+        "config/*"
+      ],
     }
   },
   "include": [
@@ -31,7 +44,13 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js",
-    ".next/types/**/*.ts"
-, "utils/bundleWebpackPlugin.js", "utils/bundle.js"  ],
-  "exclude": ["node_modules", "next.config.js"]
+    ".next/types/**/*.ts",
+    "utils/bundleWebpackPlugin.js",
+    "utils/bundle.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "next.config.js",
+    "tailwind.config.js"
+  ]
 }
