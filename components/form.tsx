@@ -8,12 +8,14 @@ import JSZip from 'jszip';
 import Metastrap, { enums } from '@metastrap/core';
 
 import NextConfig from 'config/next';
-import { IGroup, TElement } from 'types/index';
+import { IForm, TElement } from 'types/index';
 import format from 'formatters';
+import { TextInput } from './input';
+import { Button } from './button';
 
 const CURR_FRAMEWORK = 'next';
 
-let form: UseFormReturn<IGroup>;
+let form: UseFormReturn<IForm>;
 
 export default function FormMain() {
   const [zip, setZip] = useState<JSZip | null>(null);
@@ -31,13 +33,16 @@ export default function FormMain() {
       });
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async function onSubmit(data: IGroup) {
+  async function onSubmit(data: IForm) {
+    const { downloadFileName, config } = data;
     if (zip) {
       const ms = new Metastrap(
         zip,
         enums.EFrameworks.next,
-        format(data),
+        {
+          downloadFileName,
+          features: format(config),
+        },
       );
       await ms.run();
       ms.downloadZip();
@@ -45,19 +50,32 @@ export default function FormMain() {
   }
 
   form = useForm({
-    defaultValues: NextConfig,
+    defaultValues: {
+      downloadFileName: 'my-next-project',
+      config: NextConfig,
+    },
   });
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
+      <div className="my-8">
+        <TextInput
+          register={form.register}
+          name="downloadFileName"
+          placeholder="Project Name"
+        />
+        <Button
+          className="mx-3"
+        >
+          Submit
+        </Button>
+      </div>
       <Loop registerKey="" element={NextConfig} />
-      <button type="submit">Submit</button>
     </form>
   );
 }
 
 function Loop({ element, registerKey }: {
-  // eslint-disable-next-line react/require-default-props
   registerKey: string | undefined,
   element: TElement
 }) {
@@ -67,7 +85,7 @@ function Loop({ element, registerKey }: {
       // eslint-disable-next-line no-case-declarations
       const registerPrefix = (registerKey ? `${registerKey}.elements` : 'elements');
       return (
-        <>
+        <fieldset>
           {
             element.elements.map((elem, index) => (
               <Loop
@@ -77,7 +95,7 @@ function Loop({ element, registerKey }: {
               />
             ))
           }
-        </>
+        </fieldset>
       );
     case 'checkbox':
       return (
@@ -87,7 +105,7 @@ function Loop({ element, registerKey }: {
             disabled={!element.active}
             type="checkbox"
             key={id}
-            {...form.register(`${registerKey}.value` as keyof IGroup)}
+            {...form.register(`${registerKey}.value` as keyof IForm)}
           />
           <label htmlFor={id}>{element.id}</label>
         </>
@@ -102,7 +120,7 @@ function Loop({ element, registerKey }: {
                 disabled={!element.active}
                 id={option}
                 value={option}
-                {...form.register(`${registerKey}.value` as keyof IGroup)}
+                {...form.register(`${registerKey}.value` as keyof IForm)}
               />
               <label htmlFor={option}>{option}</label>
             </div>
@@ -111,14 +129,13 @@ function Loop({ element, registerKey }: {
       );
     case 'text':
       return (
-        <input
-          type="text"
+        <TextInput
           key={id}
+          name={`${registerKey}.value` as keyof IForm}
+          register={form.register}
           className="block mb-2"
-          {...form.register(`${registerKey}.value` as keyof IGroup)}
         />
       );
+    // ToDo: implement `ref`
   }
-  // if (registerKey !== undefined) {
-  // }
 }

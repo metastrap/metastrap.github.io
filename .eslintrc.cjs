@@ -6,6 +6,7 @@ module.exports = {
   ignorePatterns: ['dist/', 'out/', '@/'],
   root: true,
   env: {
+    browser: true,
     node: true,
     jest: true,
   },

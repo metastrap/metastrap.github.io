@@ -1,3 +1,5 @@
+import { types } from '@metastrap/core';
+
 /* eslint-disable no-use-before-define */
 export type TInput = 'checkbox' | 'text' | 'select' | 'number' | 'color' | 'range' | 'url';
 
@@ -35,6 +37,7 @@ export interface IElement extends ICommon {
 
 export interface IGroup extends ICommon {
   type: 'group';
+  description?: string;
   elements: TElement[];
 }
 
@@ -44,3 +47,10 @@ export interface IRoot extends ICommon {
   type: 'group';
   elements: TElement[];
 }
+
+export interface IForm {
+  downloadFileName: string,
+  config: IGroup,
+}
+
+export type ConfigFeatures = types.INextOptions['features'] & Record<string, unknown>;

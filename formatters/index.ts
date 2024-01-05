@@ -1,4 +1,4 @@
-import { IGroup, TElement } from 'types/index';
+import { ConfigFeatures, IGroup, TElement } from 'types/index';
 import type { types } from '@metastrap/core';
 
 export function convert(data: TElement): Record<string, unknown> {
@@ -26,12 +26,8 @@ export function convert(data: TElement): Record<string, unknown> {
   } : {};
 }
 
-export default function format(data: IGroup): types.INextOptions {
-  const features = convert(data) as unknown as types.INextOptions['features'] & Record<string, unknown>;
-  const downloadFileName = features.withprojectName as string;
+export default function format(data: IGroup): ConfigFeatures {
+  const features = convert(data) as unknown as ConfigFeatures;
   delete features.withprojectName;
-  return {
-    features,
-    downloadFileName,
-  };
+  return features;
 }

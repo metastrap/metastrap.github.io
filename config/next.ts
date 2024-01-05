@@ -5,12 +5,6 @@ export default {
   type: 'group',
   elements: [
     {
-      id: 'projectName',
-      type: 'text',
-      value: 'my-next-app',
-      active: true,
-    },
-    {
       id: 'styling',
       type: 'group',
       elements: [
