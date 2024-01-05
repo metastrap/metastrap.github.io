@@ -59,10 +59,10 @@ export default function FormMain() {
 
   return (
     <form
-      className=""
+      className="flex flex-col"
       onSubmit={form.handleSubmit(onSubmit)}
     >
-      <div className="my-8">
+      <div className="my-8 flex-grow-0 flex-shrink-0">
         <TextInput
           register={form.register}
           name="downloadFileName"
@@ -74,7 +74,7 @@ export default function FormMain() {
           Submit
         </Button>
       </div>
-      <div className="columns-1 lg:columns-2 2xl:columns-3 gap-8 px-2">
+      <div className="columns-1 lg:columns-2 2xl:columns-3 gap-8 px-2 flex-grow">
         <Loop form={form} registerKey="" element={NextConfig} />
       </div>
     </form>

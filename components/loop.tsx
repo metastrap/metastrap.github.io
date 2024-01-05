@@ -44,25 +44,28 @@ export default function Loop({
         ?.reduce((acc, tag) => `${acc} ${tag}`, '');
       description = (element as unknown as ICheckbox).description;
       return (
-        <div className="py-4 px-6 my-3 border border-gray-500">
-          <div className="flex">
-            <input
-              id={id}
-              disabled={!element.active}
-              type="checkbox"
-              key={id}
-              {...form.register(`${registerKey}.value` as keyof IForm)}
-            />
-            <label className="ml-3" htmlFor={id}>{element.id}</label>
+        <div className="checkbox-wrapper">
+          <input
+            className="absolute top-0 left-0 w-full h-full opacity-0 z-[1] cursor-pointer disabled:cursor-not-allowed"
+            id={id}
+            disabled={!element.active}
+            type="checkbox"
+            key={id}
+            {...form.register(`${registerKey}.value` as keyof IForm)}
+          />
+          <div className={`checkbox-details py-4 px-6 my-3 border border-gray-500 relative ${!element.active && 'disabled'}`}>
+            <div className="flex checkbox-shadow">
+              <label className="ml-3" htmlFor={id}>{element.id}</label>
+            </div>
+            {
+              tagText
+              && <p className="uppercase text-gray-400 text-xs">{tagText}</p>
+            }
+            {
+              description
+              && <p className="capitalize text-sm text-gray-300 mt-3">{description}</p>
+            }
           </div>
-          {
-            tagText
-            && <p className="uppercase text-gray-400 text-xs">{tagText}</p>
-          }
-          {
-            description
-            && <p className="capitalize text-sm text-gray-300 mt-3">{description}</p>
-          }
         </div>
       );
     case 'radio':

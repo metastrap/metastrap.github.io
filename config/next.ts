@@ -18,6 +18,8 @@ export default {
         {
           id: 'Windicss',
           type: 'checkbox',
+          tags: ['css'],
+          description: 'Next generation utility-first CSS framework.',
           value: true,
         },
         {
