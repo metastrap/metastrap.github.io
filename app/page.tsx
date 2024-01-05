@@ -30,4 +30,7 @@ export const metadata: Metadata = {
     url: 'https://metastarp.github.io/',
     siteName: 'MetaStrap',
   },
+  other: {
+    'google-site-verification': 'H04IA54IYMintIPECDfJx_PRqGr67Z_fowTsInJtkZY',
+  },
 };
