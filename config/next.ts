@@ -10,6 +10,8 @@ export default {
       elements: [
         {
           id: 'Tailwindcss',
+          tags: ['css'],
+          description: 'A utility-first CSS framework for rapidly building custom designs.',
           type: 'checkbox',
           active: true,
         },
@@ -92,17 +94,6 @@ export default {
         {
           id: 'ReactBulma',
           type: 'checkbox',
-        },
-      ],
-    },
-    {
-      id: 'tracking',
-      type: 'group',
-      elements: [
-        {
-          id: 'GoogleAnalytics',
-          type: 'ref',
-          references: 'elements.styling.Tailwindcss',
         },
       ],
     },

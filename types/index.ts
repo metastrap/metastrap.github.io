@@ -28,6 +28,8 @@ export interface ICheckbox extends ICommon {
   type: 'radio';
   options: string[];
   value: boolean;
+  tags?: string[];
+  description?: string;
 }
 
 export interface IElement extends ICommon {

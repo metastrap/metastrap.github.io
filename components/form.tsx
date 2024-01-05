@@ -3,13 +3,14 @@
 import {
   UseFormReturn, useForm,
 } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import JSZip from 'jszip';
 import Metastrap, { enums } from '@metastrap/core';
 
 import NextConfig from 'config/next';
-import { IForm, TElement } from 'types/index';
+import { ICheckbox, IForm, TElement } from 'types/index';
 import format from 'formatters';
+import pascalToSpaces from 'utils/pascalToSpaces';
 import { TextInput } from './input';
 import { Button } from './button';
 
@@ -57,7 +58,10 @@ export default function FormMain() {
   });
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      className=""
+      onSubmit={form.handleSubmit(onSubmit)}
+    >
       <div className="my-8">
         <TextInput
           register={form.register}
@@ -70,51 +74,74 @@ export default function FormMain() {
           Submit
         </Button>
       </div>
-      <Loop registerKey="" element={NextConfig} />
+      <div className="columns-1 lg:columns-2 2xl:columns-3 gap-8 px-2">
+        <Loop registerKey="" element={NextConfig} />
+      </div>
     </form>
   );
 }
 
-function Loop({ element, registerKey }: {
+function Loop({ element, registerKey, level }: {
   registerKey: string | undefined,
   element: TElement
+  level?: number,
 }) {
-  const { type, id } = element;
+  const { type, id, name } = element;
+  const registerPrefix = (registerKey ? `${registerKey}.elements` : 'elements');
+  const Wrapper = level ? 'fieldset' : Fragment;
+  const fieldsetArgs = level ? { className: 'mb-12' } : {};
+
+  let tagText;
+  let description;
+
   switch (type) {
     case 'group':
-      // eslint-disable-next-line no-case-declarations
-      const registerPrefix = (registerKey ? `${registerKey}.elements` : 'elements');
       return (
-        <fieldset>
+        <Wrapper {...fieldsetArgs}>
+          {!!level && <legend className="ml-2">{name || pascalToSpaces(id)}</legend>}
           {
             element.elements.map((elem, index) => (
               <Loop
+                level={level || 0 + 1}
                 registerKey={`${registerPrefix}.${index}`}
                 key={element.id}
                 element={elem}
               />
             ))
           }
-        </fieldset>
+        </Wrapper>
       );
     case 'checkbox':
+      tagText = (element as unknown as ICheckbox).tags
+        ?.reduce((acc, tag) => `${acc} ${tag}`, '');
+      description = (element as unknown as ICheckbox).description;
       return (
-        <>
-          <input
-            id={id}
-            disabled={!element.active}
-            type="checkbox"
-            key={id}
-            {...form.register(`${registerKey}.value` as keyof IForm)}
-          />
-          <label htmlFor={id}>{element.id}</label>
-        </>
+        <div className="py-4 px-6 my-3 border border-gray-500">
+          <div className="flex">
+            <input
+              id={id}
+              disabled={!element.active}
+              type="checkbox"
+              key={id}
+              {...form.register(`${registerKey}.value` as keyof IForm)}
+            />
+            <label className="ml-3" htmlFor={id}>{element.id}</label>
+          </div>
+          {
+            tagText
+            && <p className="uppercase text-gray-400 text-xs">{tagText}</p>
+          }
+          {
+            description
+            && <p className="capitalize text-sm text-gray-300 mt-3">{description}</p>
+          }
+        </div>
       );
     case 'radio':
       return (
-        <>
+        <div>
           {element.options.map((option: string) => (
-            <div key={option}>
+            <Fragment key={option}>
               <input
                 type="radio"
                 disabled={!element.active}
@@ -123,9 +150,9 @@ function Loop({ element, registerKey }: {
                 {...form.register(`${registerKey}.value` as keyof IForm)}
               />
               <label htmlFor={option}>{option}</label>
-            </div>
+            </Fragment>
           ))}
-        </>
+        </div>
       );
     case 'text':
       return (
@@ -139,3 +166,7 @@ function Loop({ element, registerKey }: {
     // ToDo: implement `ref`
   }
 }
+
+Loop.defaultProps = {
+  level: 0,
+};
