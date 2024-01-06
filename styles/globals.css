@@ -32,7 +32,12 @@ body {
 
 .checkbox-shadow::before {
   content: '';
-  @apply relative left-0 top-0.5 w-4 h-4 rounded-full border-2 border-primary cursor-pointer;
+  @apply relative left-0 top-0.5 w-4 h-4 rounded-sm border-2 border-primary cursor-pointer;
+}
+
+
+.disabled .checkbox-shadow::before {
+  @apply border-gray-400;
 }
 
 [type="checkbox"]:checked + .checkbox-details {
@@ -42,7 +47,7 @@ body {
 
 [type="checkbox"]:checked + .checkbox-details > .checkbox-shadow::after {
   content: '';
-  @apply absolute w-1.5 h-1.5 left-[5px] top-[7px] rounded-full bg-primary;
+  @apply absolute w-1.5 h-1.5 left-[5px] top-[7px] bg-primary;
 }
 
 .checkbox-details.disabled {

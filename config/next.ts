@@ -20,7 +20,6 @@ export default {
           type: 'checkbox',
           tags: ['css'],
           description: 'Next generation utility-first CSS framework.',
-          value: true,
         },
         {
           id: 'StyledComponents',
@@ -36,6 +35,17 @@ export default {
         },
         {
           id: 'Yoga',
+          type: 'checkbox',
+        },
+      ],
+    },
+    {
+      id: 'code-style',
+      name: 'Code Style',
+      type: 'group',
+      elements: [
+        {
+          id: 'Eslint',
           type: 'checkbox',
         },
       ],
@@ -245,6 +255,12 @@ export default {
               type: 'checkbox',
             },
           ],
+        },
+        {
+          id: 'Mdx',
+          name: 'MDX',
+          active: true,
+          type: 'checkbox',
         },
       ],
     },
