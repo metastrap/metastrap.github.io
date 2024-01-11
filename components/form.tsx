@@ -3,7 +3,7 @@
 import {
   UseFormReturn, useForm,
 } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import JSZip from 'jszip';
 import Metastrap, { enums } from '@metastrap/core';
 
@@ -18,7 +18,9 @@ const CURR_FRAMEWORK = 'next';
 
 let form: UseFormReturn<IForm>;
 
-export default function FormMain() {
+export default function FormMain({ children }: {
+  children?: ReactNode,
+}) {
   const [zip, setZip] = useState<JSZip | null>(null);
 
   useEffect(() => {
@@ -71,12 +73,17 @@ export default function FormMain() {
         <Button
           className="mx-3"
         >
-          Submit
+          Download Zip
         </Button>
       </div>
+      {children}
       <div className="columns-1 lg:columns-2 2xl:columns-3 gap-8 px-2 flex-grow">
         <Loop form={form} registerKey="config" element={NextConfig} />
       </div>
     </form>
   );
 }
+
+FormMain.defaultProps = {
+  children: null,
+};

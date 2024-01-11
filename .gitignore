@@ -38,3 +38,5 @@ next-env.d.ts
 
 # project
 public/zip/**/*
+public/sitemap*.xml
+public/robots.txt

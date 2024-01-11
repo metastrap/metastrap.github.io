@@ -157,6 +157,7 @@ export default {
           id: 'Vitest',
           type: 'checkbox',
           active: true,
+          description: 'Vitest is a zero-config React testing framework that runs on Vite.',
         },
         {
           id: 'headless',
@@ -190,6 +191,7 @@ export default {
           name: 'TurboPack',
           type: 'checkbox',
           active: true,
+          description: 'TurboPack is a zero-config React build framework that runs on Vite.',
         },
       ],
     },
@@ -266,6 +268,7 @@ export default {
           name: 'MDX',
           active: true,
           type: 'checkbox',
+          description: 'MDX is an authorable format that lets you seamlessly write JSX in your Markdown documents.',
         },
       ],
     },

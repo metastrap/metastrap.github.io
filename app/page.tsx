@@ -1,11 +1,14 @@
 import Form from 'components/form';
+import MessagePreview from 'components/messagePreview';
 import { Metadata } from 'next';
 
 export default async function Home() {
   return (
     <main className="container mx-auto pt-8">
       <h1 className="text-5xl text-center">MetaStrap</h1>
-      <Form />
+      <Form>
+        <MessagePreview />
+      </Form>
     </main>
   );
 }
