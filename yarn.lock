@@ -162,9 +162,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@metastrap/core@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@metastrap/core/-/core-2.1.1.tgz#9e5123b2065b9a1c4ba91dede7c6929d2374f678"
-  integrity sha512-W0GPYeCkeeMSJ0K3E/tseMmfePBhelER5u9Js2rci0KOfpfu5AvSkmBxOJ0u0CbLUuGV3IHSeE5PcbHd5ku3ug==
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@metastrap/core/-/core-2.3.3.tgz#55a3c762858b6c25be8a3fb711e5005d90c7dec1"
+  integrity sha512-jS8rRfCEvwe6NmoAVORRV8Zw8RetfZoWYV5uupo3OTVq9zXtVQdt/PogLGq0EKruthNpsc8wFAbwUNNkIPTBOg==
   dependencies:
     "@babel/generator" "^7.23.6"
     "@babel/parser" "^7.23.6"

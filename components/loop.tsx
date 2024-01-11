@@ -55,7 +55,7 @@ export default function Loop({
           />
           <div className={`checkbox-details py-4 px-6 my-3 border border-gray-500 relative ${!element.active && 'disabled'}`}>
             <div className="flex checkbox-shadow">
-              <label className="ml-3" htmlFor={id}>{element.id}</label>
+              <label className="ml-3" htmlFor={id}>{element.name || element.id}</label>
             </div>
             {
               tagText

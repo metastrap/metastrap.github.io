@@ -16,10 +16,12 @@ export default {
           active: true,
         },
         {
-          id: 'Windicss',
+          id: 'Windi',
+          name: 'Windi CSS',
           type: 'checkbox',
           tags: ['css'],
           description: 'Next generation utility-first CSS framework.',
+          active: true,
         },
         {
           id: 'StyledComponents',
@@ -154,6 +156,7 @@ export default {
         {
           id: 'Vitest',
           type: 'checkbox',
+          active: true,
         },
         {
           id: 'headless',
@@ -183,8 +186,10 @@ export default {
       type: 'group',
       elements: [
         {
-          id: 'TurboPack',
+          id: 'Turbopack',
+          name: 'TurboPack',
           type: 'checkbox',
+          active: true,
         },
       ],
     },
