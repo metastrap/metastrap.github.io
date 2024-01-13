@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "postbuild": "next-sitemap",
+    "build": "next build && ls -al out",
+    "postbuild": "next-sitemap && ls -al out",
     "start": "serve out",
     "prepare": "yarn husky install",
     "test": "echo test",
