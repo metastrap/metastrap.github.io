@@ -8,7 +8,7 @@ import Link from 'next/link';
 const socialLinks = [
   {
     icon: <SiGithub />,
-    url: 'https://github.com/metastarp/metastarp.github.io',
+    url: 'https://github.com/metastrap/metastrap.github.io',
   },
   {
     icon: <SiTwitter />,
