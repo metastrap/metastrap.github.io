@@ -3,7 +3,7 @@ import { UseFormReturn } from 'react-hook-form';
 
 import { ICheckbox, IForm, TElement } from 'types/index';
 import pascalToSpaces from 'utils/pascalToSpaces';
-import { TextInput } from './input';
+import { TextInput } from '../atoms/input';
 
 interface ILoopProps {
   element: TElement;

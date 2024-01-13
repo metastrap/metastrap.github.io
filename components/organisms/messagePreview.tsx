@@ -17,10 +17,11 @@ export default function MessagePreview() {
           </p>
           <button
             type="button"
-            className="p-4"
+            className="p-4 flex"
+            aria-label="Close message"
             onClick={() => setMessagePreview(false)}
           >
-            x
+            <i className="icon-clear" />
           </button>
         </div>
       )

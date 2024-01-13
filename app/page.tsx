@@ -1,11 +1,10 @@
-import Form from 'components/form';
-import MessagePreview from 'components/messagePreview';
+import Form from 'components/organisms/form';
+import MessagePreview from 'components/organisms/messagePreview';
 import { Metadata } from 'next';
 
 export default async function Home() {
   return (
     <main className="container mx-auto pt-8">
-      <h1 className="text-5xl text-center">MetaStrap</h1>
       <Form>
         <MessagePreview />
       </Form>

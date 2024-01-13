@@ -10,9 +10,9 @@ import Metastrap, { enums } from '@metastrap/core';
 import NextConfig from 'config/next';
 import { IForm } from 'types/index';
 import format from 'formatters';
-import { TextInput } from './input';
-import { Button } from './button';
-import Loop from './loop';
+import { TextInput } from '../atoms/input';
+import { Button } from '../atoms/button/button';
+import Loop from '../molecules/loop';
 
 const CURR_FRAMEWORK = 'next';
 

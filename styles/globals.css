@@ -57,3 +57,8 @@ body {
 .checkbox-details.disabled label {
   @apply text-gray-200;
 }
+
+/* fab button */
+.active .icon-clear {
+  @apply rotate-0;
+}

@@ -1,9 +1,4 @@
-import { ReactNode } from 'react';
-
-interface IButtonProps {
-  children: ReactNode;
-  className: string;
-}
+import { IButtonProps } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Button({

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://metastrap.github.io
+
+# Sitemaps
+Sitemap: https://metastrap.github.io/sitemap.xml

@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.3",
+    "@icons-pack/react-simple-icons": "^9.2.0",
     "@metastrap/core": "^2.1.0",
     "cross-env": "^7.0.3",
     "jszip": "^3.10.1",
