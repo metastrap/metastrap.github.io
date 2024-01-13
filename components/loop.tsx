@@ -5,14 +5,16 @@ import { ICheckbox, IForm, TElement } from 'types/index';
 import pascalToSpaces from 'utils/pascalToSpaces';
 import { TextInput } from './input';
 
+interface ILoopProps {
+  element: TElement;
+  registerKey: string | undefined;
+  level: number
+  form: UseFormReturn<IForm>
+}
+
 export default function Loop({
   element, registerKey, level, form,
-}: {
-  registerKey: string | undefined,
-  element: TElement
-  level?: number,
-  form: UseFormReturn<IForm>
-}) {
+}: ILoopProps) {
   const { type, id, name } = element;
   const registerPrefix = (registerKey ? `${registerKey}.elements` : 'elements');
   const Wrapper = level ? 'fieldset' : Fragment;
@@ -97,7 +99,3 @@ export default function Loop({
     // ToDo: implement `ref`
   }
 }
-
-Loop.defaultProps = {
-  level: 0,
-};

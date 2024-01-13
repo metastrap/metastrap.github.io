@@ -78,7 +78,7 @@ export default function FormMain({ children }: {
       </div>
       {children}
       <div className="columns-1 lg:columns-2 2xl:columns-3 gap-8 px-2 flex-grow">
-        <Loop form={form} registerKey="config" element={NextConfig} />
+        <Loop level={0} form={form} registerKey="config" element={NextConfig} />
       </div>
     </form>
   );
