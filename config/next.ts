@@ -296,6 +296,10 @@ export default {
           id: 'Redux',
           type: 'checkbox',
         },
+        {
+          id: 'Overmind',
+          type: 'checkbox',
+        },
       ],
     },
     {

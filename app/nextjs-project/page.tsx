@@ -1,23 +1,23 @@
-import Form from 'components/organisms/form';
-import Frameworks from 'components/organisms/frameworks';
 import MessagePreview from 'components/organisms/messagePreview';
-import type { Metadata } from 'next';
+import FormMain from 'components/organisms/form';
+
+import type { Metadata } from 'next/types';
 import Link from 'next/link';
 
-export default async function Home() {
+export default function NextJsProject() {
   return (
     <>
-      <Frameworks />
       <MessagePreview>
         <span>
-          MetaStrap is a dev tool to bootstrap FrontEnd frameworks using various features,
-          configurations and other dependencies, similar to
+          MetaStrap helps to bootstrap Next.Js project with various libraries
+          in the ecosystem. Select required options, download the zip and start coding!
+          <br />
+          Please consider&nbsp;
         </span>
-        &nbsp;
-        <Link href="https://start.spring.io" target="_blank">Spring Initializr</Link>
-        <span>. Select required options, download the zip and start coding!</span>
+        <Link href="https://github.com/metastrap" target="_blank">contributing</Link>
+        <span> to the project.</span>
       </MessagePreview>
-      <Form />
+      <FormMain />
     </>
   );
 }
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   keywords: [
     'next.js',
     'typescript',
-    'react',
-    'astro js',
-    'nuxt js',
+    'tailwindcss react',
+    'bootstrap 5',
+    'react-hook-form',
   ],
   openGraph: {
     type: 'website',

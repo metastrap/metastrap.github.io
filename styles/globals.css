@@ -62,3 +62,7 @@ body {
 .active .icon-clear {
   @apply rotate-0;
 }
+
+a {
+  @apply text-primary;
+}

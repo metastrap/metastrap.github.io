@@ -71,6 +71,7 @@ export default function FormMain({ children }: {
           placeholder="Project Name"
         />
         <Button
+          type="submit"
           className="mx-3"
         >
           Download Zip

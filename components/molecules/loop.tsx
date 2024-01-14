@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { SiNpm } from '@icons-pack/react-simple-icons';
+import { SiNpm, SiNpmHex } from '@icons-pack/react-simple-icons';
 
 import { ICheckbox, IForm, TElement } from 'types/index';
 import { pascalToSpaces } from 'utils/textCaseConversion';
@@ -71,7 +71,7 @@ export default function Loop({
             }
             <div className="detail-buttons absolute top-3 right-3 z-10">
               <Link href={`https://www.npmjs.com/package/${id}`} target="_blank">
-                <SiNpm className="text-gray-400" />
+                <SiNpm color={SiNpmHex} className="text-gray-400" />
               </Link>
             </div>
           </div>
